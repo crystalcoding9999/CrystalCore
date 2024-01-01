@@ -94,29 +94,29 @@ public class RankManager {
 
         ArrayList<String> vipPermissions = new ArrayList<>();
         vipPermissions.add("crystalcore.nick");
-        ArrayList<String> parents = new ArrayList<>();
-        parents.add("default");
-        Rank vipRank = new Rank("vip", "[&aVip&r]", vipPermissions, parents);
+        ArrayList<String> vipParents = new ArrayList<>();
+        vipParents.add("default");
+        Rank vipRank = new Rank("vip", "[&aVip&r]", vipPermissions, vipParents);
         ranks.add(vipRank);
         rankMap.put("vip", vipRank); // Add vip rank to rankMap
 
         ArrayList<String> staffPermissions = new ArrayList<>();
         staffPermissions.add("crystalcore.vanish");
-        parents.clear();
-        parents.add("vip");
-        Rank moderatorRank = new Rank("moderator", "[&2Moderator&r]", staffPermissions, parents);
+        ArrayList<String> moderatorParents = new ArrayList<>();
+        moderatorParents.add("vip");
+        Rank moderatorRank = new Rank("moderator", "[&2Moderator&r]", staffPermissions, moderatorParents);
         ranks.add(moderatorRank);
         rankMap.put("moderator", moderatorRank); // Add moderator rank to rankMap
 
-        parents.clear();
-        parents.add("moderator");
-        Rank adminRank = new Rank("admin", "[&cAdmin&r]", staffPermissions, parents);
+        ArrayList<String> adminParents = new ArrayList<>();
+        adminParents.add("moderator");
+        Rank adminRank = new Rank("admin", "[&cAdmin&r]", staffPermissions, adminParents);
         ranks.add(adminRank);
         rankMap.put("admin", adminRank); // Add admin rank to rankMap
 
-        parents.clear();
-        parents.add("admin");
-        Rank ownerRank = new Rank("owner", "[&4Owner&r]", staffPermissions, parents);
+        ArrayList<String> ownerParents = new ArrayList<>();
+        ownerParents.add("admin");
+        Rank ownerRank = new Rank("owner", "[&4Owner&r]", staffPermissions, ownerParents);
         ranks.add(ownerRank);
         rankMap.put("owner", ownerRank); // Add owner rank to rankMap
     }
