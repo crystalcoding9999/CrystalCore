@@ -1,0 +1,34 @@
+name: CrystalCore
+version: '${project.version}'
+main: com.crystalcoding_.crystalcore.CrystalCore
+api-version: '1.20'
+authors: [crystalcoding_]
+description: a core plugin for servers
+prefix: CrystalCore
+permissions:
+  crystalcore.vanish:
+    default: op
+  crystalcore.nick:
+    default: op
+  crystalcore.ranks:
+    default: op
+  crystalcore.ranks.set:
+    default: op
+  crystalcore.ranks.addparent:
+    default: op
+  crystalcore.ranks.removeparent:
+    default: op
+
+commands:
+  vanish:
+    description: hide yourself from other players
+    permission: crystalcore.vanish
+    aliases:
+      - v
+      - van
+  nickname:
+    description: rename yourself
+    aliases:
+      - nick
+  rank:
+    description: main rank command
