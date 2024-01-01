@@ -1,6 +1,7 @@
 package com.crystalcoding_.crystalcore;
 
 import com.crystalcoding_.crystalcore.commands.*;
+import com.crystalcoding_.crystalcore.listeners.ChangeGamemodeListener;
 import com.crystalcoding_.crystalcore.listeners.JoinListener;
 import com.crystalcoding_.crystalcore.listeners.QuitListener;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
@@ -31,11 +32,20 @@ public class CrystalCore extends JavaPlugin {
 
         new JoinListener(this);
         new QuitListener(this);
+        new ChangeGamemodeListener(this);
 
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("nickname").setExecutor(new NicknameCommand());
         getCommand("rank").setExecutor(new RankCommand());
         getCommand("rank").setTabCompleter(new RankTabCompleter());
+
+        // gamemode commands
+        getCommand("gamemode").setExecutor(new GamemodeCommand());
+        getCommand("gamemode").setTabCompleter(new GamemodeTabCompleter());
+        getCommand("gms").setExecutor(new GamemodeCommand());
+        getCommand("gmc").setExecutor(new GamemodeCommand());
+        getCommand("gmsp").setExecutor(new GamemodeCommand());
+        getCommand("gma").setExecutor(new GamemodeCommand());
     }
 
     @Override

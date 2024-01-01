@@ -18,6 +18,16 @@ permissions:
     default: op
   crystalcore.ranks.removeparent:
     default: op
+  crystalcore.gamemode.*:
+    default: op
+  crystalcore.gamemode.survival:
+    default: op
+  crystalcore.gamemode.creative:
+    default: op
+  crystalcore.gamemode.spectator:
+    default: op
+  crystalcore.gamemode.adventure:
+    default: op
 
 commands:
   vanish:
@@ -32,3 +42,15 @@ commands:
       - nick
   rank:
     description: main rank command
+  gamemode:
+    description: switch gamemode
+    aliases:
+      - gm
+  gms:
+    description: switch to survival
+  gmc:
+    description: switch to creative
+  gmsp:
+    description: switch to spectator
+  gma:
+    description: switch to adventure

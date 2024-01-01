@@ -33,3 +33,7 @@ messages:
   MissingArgumentsMessage: "{prefix} &cMissing arguments! Usage: /{command} {args}"
   RankNotFoundMessage: "{prefix} &cThe &r{rank} &crank does not exist!"
   PlayerNotFoundMessage: "{prefix} &cPlayer &r{player} &cnot found!"
+
+  # other
+  GamemodeChangedMessage: "{prefix} &aYour gamemode has been updated to &r{gamemode}"
+  GamemodeChangeOtherMessage: "{prefix} &aUpdated &r{player}'s &agamemode to &r{gamemode}"

@@ -8,47 +8,71 @@ import org.bukkit.entity.Player;
 
 public class MessageManager {
     private final String Prefix;
+
+    // Join/Leave messages
     private final String JoinMessage;
     private final String LeaveMessage;
     private final String SilentJoinMessage;
     private final String SilentLeaveMessage;
+
+    // Vanish messages
     private final String SelfVanishMessage;
     private final String SelfUnvanishMessage;
     private final String OtherVanishMessage;
     private final String OtherUnvanishMessage;
+
+    // Rank messages
     private final String RankChangedMessage;
     private final String TempRankChangedMessage;
     private final String RankDeletedMessage;
+
+    // Nickname messages
     private final String NicknameChangedMessage;
     private final String NicknameResetMessage;
+
+
+    // Command error messages
     private final String PlayerOnlyMessage;
     private final String NoPermissionMessage;
     private final String MissingArgumentsMessage;
     private final String RankNotFoundMessage;
     private final String PlayerNotFoundMessage;
 
+    // Command Responses
+    private final String GamemodeChangedMessage;
+    private final String GamemodeChangeOtherMessage;
+
     public MessageManager(CrystalCore plugin) {
         FileConfiguration config = plugin.getConfig();
 
-        Prefix = color(color(config.getString("messages.prefix")));
-        JoinMessage = color(config.getString("messages.JoinMessage").replace("{prefix}", Prefix));
-        LeaveMessage = color(config.getString("messages.LeaveMessage").replace("{prefix}", Prefix));
-        SilentJoinMessage = color(config.getString("messages.SilentJoinMessage").replace("{prefix}", Prefix));
-        SilentLeaveMessage = color(config.getString("messages.SilentLeaveMessage").replace("{prefix}", Prefix));
-        SelfVanishMessage = color(config.getString("messages.SelfVanishMessage").replace("{prefix}", Prefix));
-        SelfUnvanishMessage = color(config.getString("messages.SelfUnvanishMessage").replace("{prefix}", Prefix));
-        OtherVanishMessage = color(config.getString("messages.OtherVanishMessage").replace("{prefix}", Prefix));
-        OtherUnvanishMessage = color(config.getString("messages.OtherUnvanishMessage").replace("{prefix}", Prefix));
-        RankChangedMessage = color(config.getString("messages.RankChangedMessage").replace("{prefix}", Prefix));
-        TempRankChangedMessage = color(config.getString("messages.TempRankChangedMessage").replace("{prefix}", Prefix));
-        RankDeletedMessage = color(config.getString("messages.RankDeletedMessage").replace("{prefix}", Prefix));
-        NicknameChangedMessage = color(config.getString("messages.NicknameChangedMessage").replace("{prefix}", Prefix));
-        NicknameResetMessage = color(config.getString("messages.NicknameResetMessage").replace("{prefix}", Prefix));
-        PlayerOnlyMessage = color(config.getString("messages.PlayerOnlyMessage").replace("{prefix}", Prefix));
-        NoPermissionMessage = color(config.getString("messages.NoPermissionMessage").replace("{prefix}", Prefix));
-        MissingArgumentsMessage = color(config.getString("messages.MissingArgumentsMessage").replace("{prefix}", Prefix));
-        RankNotFoundMessage = color(config.getString("messages.RankNotFoundMessage").replace("{prefix}", Prefix));
-        PlayerNotFoundMessage = color(config.getString("messages.PlayerNotFoundMessage").replace("{prefix}", Prefix));
+        Prefix = color(getFromConfig("messages.prefix", config));
+        JoinMessage = color(getFromConfig("messages.JoinMessage", config));
+        LeaveMessage = color(getFromConfig("messages.LeaveMessage", config));
+        SilentJoinMessage = color(getFromConfig("messages.SilentJoinMessage", config));
+        SilentLeaveMessage = color(getFromConfig("messages.SilentLeaveMessage", config));
+        SelfVanishMessage = color(getFromConfig("messages.SelfVanishMessage", config));
+        SelfUnvanishMessage = color(getFromConfig("messages.SelfUnvanishMessage", config));
+        OtherVanishMessage = color(getFromConfig("messages.OtherVanishMessage", config));
+        OtherUnvanishMessage = color(getFromConfig("messages.OtherUnvanishMessage", config));
+        RankChangedMessage = color(getFromConfig("messages.RankChangedMessage", config));
+        TempRankChangedMessage = color(getFromConfig("messages.TempRankChangedMessage", config));
+        RankDeletedMessage = color(getFromConfig("messages.RankDeletedMessage", config));
+        NicknameChangedMessage = color(getFromConfig("messages.NicknameChangedMessage", config));
+        NicknameResetMessage = color(getFromConfig("messages.NicknameResetMessage", config));
+        PlayerOnlyMessage = color(getFromConfig("messages.PlayerOnlyMessage", config));
+        NoPermissionMessage = color(getFromConfig("messages.NoPermissionMessage", config));
+        MissingArgumentsMessage = color(getFromConfig("messages.MissingArgumentsMessage", config));
+        RankNotFoundMessage = color(getFromConfig("messages.RankNotFoundMessage", config));
+        PlayerNotFoundMessage = color(getFromConfig("messages.PlayerNotFoundMessage", config));
+        GamemodeChangedMessage = color(getFromConfig("messages.GamemodeChangedMessage", config));
+        GamemodeChangeOtherMessage = color(getFromConfig("messages.GamemodeChangeOtherMessage", config));
+    }
+
+    String getFromConfig(String key, FileConfiguration config) {
+        if (Prefix == null) {
+            return config.getString(key, "");
+        }
+        return config.getString(key, "").replace("{prefix}", Prefix);
     }
 
     public static String color(String msg) {
@@ -137,5 +161,13 @@ public class MessageManager {
 
     public String getPlayerNotFoundMessage(String player) {
         return PlayerNotFoundMessage.replace("{player}", player);
+    }
+
+    public String getGamemodeChangedMessage(String gamemode) {
+        return GamemodeChangedMessage.replace("{gamemode}", gamemode);
+    }
+
+    public String getGamemodeChangeOtherMessage(String player, String gamemode) {
+        return GamemodeChangeOtherMessage.replace("{player}", player).replace("{gamemode}", gamemode);
     }
 }
