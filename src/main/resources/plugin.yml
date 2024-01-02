@@ -36,6 +36,11 @@ permissions:
     default: op
   crystalcore.gamemode.*:
     default: op
+    children:
+      crystalcore.gamemode.survival: true
+      crystalcore.gamemode.creative: true
+      crystalcore.gamemode.spectator: true
+      crystalcore.gamemode.adventure: true
   crystalcore.gamemode.survival:
     default: op
   crystalcore.gamemode.creative:
@@ -77,3 +82,5 @@ commands:
       - tell
       - w
       - whisper
+  heal:
+    description: not even a scratch
