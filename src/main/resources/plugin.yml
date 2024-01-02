@@ -53,6 +53,8 @@ permissions:
     default: op
   crystalcore.feed:
     default: op
+  crystalcore.fly:
+    default: op
 
 commands:
   vanish:
@@ -91,3 +93,5 @@ commands:
     description: not even a scratch
   feed:
     description: who needs to eat?
+  fly:
+    description: i believe i can fly

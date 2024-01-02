@@ -59,3 +59,7 @@ messages:
   HealedOtherMessage: "{prefix} &6Healed &r{player}&6!"
   FeedMessage: "{prefix} &6You have been fed!"
   FeedOtherMessage: "{prefix} &6Fed &r{player}&6!"
+  FlightOnMessage: "{prefix} &6Fly mode &aEnabled"
+  FlightOnOtherMessage: "{prefix} &aEnabled &6fly mode for &r{player}"
+  FlightOffMessage: "{prefix} &6Fly mode &cDisabled"
+  FlightOffOtherMessage: "{prefix} &cDisabled &6fly mode for &r{player}"

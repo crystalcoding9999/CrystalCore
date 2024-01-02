@@ -63,6 +63,10 @@ public class MessageManager {
     private final String HealedOtherMessage;
     private final String FeedMessage;
     private final String FeedOtherMessage;
+    private final String FlightOnMessage;
+    private final String FlightOnOtherMessage;
+    private final String FlightOffMessage;
+    private final String FlightOffOtherMessage;
 
     public MessageManager(CrystalCore plugin) {
         FileConfiguration config = plugin.getConfig();
@@ -122,6 +126,10 @@ public class MessageManager {
         HealedOtherMessage = color(getFromConfig("messages.HealedOtherMessage", config));
         FeedMessage = color(getFromConfig("messages.FeedMessage", config));
         FeedOtherMessage = color(getFromConfig("messages.FeedOtherMessage", config));
+        FlightOnMessage = color(getFromConfig("messages.FlightOnMessage", config));
+        FlightOnOtherMessage = color(getFromConfig("messages.FlightOnOtherMessage", config));
+        FlightOffMessage = color(getFromConfig("messages.FlightOffMessage", config));
+        FlightOffOtherMessage = color(getFromConfig("messages.FlightOffOtherMessage", config));
     }
 
     String getFromConfig(String key, FileConfiguration config) {
@@ -332,6 +340,22 @@ public class MessageManager {
 
     public String getFeedOtherMessage(String player) {
         return FeedOtherMessage.replace("{player}", player);
+    }
+
+    public String getFlightOnMessage() {
+        return FlightOnMessage;
+    }
+
+    public String getFlightOnOtherMessage(String player) {
+        return FlightOnOtherMessage.replace("{player}", player);
+    }
+
+    public String getFlightOffMessage() {
+        return FlightOffMessage;
+    }
+
+    public String getFlightOffOtherMessage(String player) {
+        return FlightOffOtherMessage.replace("{player}", player);
     }
 
     //endregion

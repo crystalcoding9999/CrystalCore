@@ -46,6 +46,8 @@ public class CrystalCore extends JavaPlugin {
         getCommand("heal").setTabCompleter(new AllPlayersTabCompleter());
         getCommand("feed").setExecutor(new FeedCommand());
         getCommand("feed").setTabCompleter(new AllPlayersTabCompleter());
+        getCommand("fly").setExecutor(new FlyCommand());
+        getCommand("fly").setTabCompleter(new FlyTabCompleter());
 
         // gamemode commands
         getCommand("gamemode").setExecutor(new GamemodeCommand());
