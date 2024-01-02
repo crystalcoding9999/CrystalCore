@@ -51,7 +51,7 @@ permissions:
     default: op
   crystalcore.heal:
     default: op
-  crystalcraft.feed:
+  crystalcore.feed:
     default: op
 
 commands:
