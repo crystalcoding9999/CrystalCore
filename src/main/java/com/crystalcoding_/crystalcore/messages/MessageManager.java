@@ -32,6 +32,10 @@ public class MessageManager {
     private final String NicknameChangedMessage;
     private final String NicknameResetMessage;
 
+    // Message command Messages
+    private final String DirectMessageSentMessage;
+    private final String DirectMessageReceivedMessage;
+
 
     // Command error messages
     private final String PlayerOnlyMessage;
@@ -84,6 +88,10 @@ public class MessageManager {
         NicknameChangedMessage = color(getFromConfig("messages.NicknameChangedMessage", config));
         NicknameResetMessage = color(getFromConfig("messages.NicknameResetMessage", config));
         PlayerOnlyMessage = color(getFromConfig("messages.PlayerOnlyMessage", config));
+
+        // Message command Messages
+        DirectMessageSentMessage = color(getFromConfig("messages.DirectMessageSentMessage", config));
+        DirectMessageReceivedMessage = color(getFromConfig("messages.DirectMessageReceivedMessage", config));
 
         // Command error messages
         NoPermissionMessage = color(getFromConfig("messages.NoPermissionMessage", config));
@@ -199,6 +207,20 @@ public class MessageManager {
     public String getNicknameResetMessage() {
         return NicknameResetMessage;
     }
+
+    //endregion
+
+    //region Message command Messages
+
+
+    public String getDirectMessageSentMessage(String sender, String receiver, String message) {
+        return DirectMessageSentMessage.replace("{sender}", sender).replace("{receiver}", receiver).replace("{message}", message);
+    }
+
+    public String getDirectMessageReceivedMessage(String sender, String receiver, String message) {
+        return DirectMessageReceivedMessage.replace("{sender}", sender).replace("{receiver}", receiver).replace("{message}", message);
+    }
+
 
     //endregion
 

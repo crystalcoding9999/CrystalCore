@@ -70,3 +70,10 @@ commands:
     description: switch to spectator
   gma:
     description: switch to adventure
+  message:
+    description: send a private message to someone
+    aliases:
+      - msg
+      - tell
+      - w
+      - whisper

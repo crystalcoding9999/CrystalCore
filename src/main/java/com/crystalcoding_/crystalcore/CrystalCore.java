@@ -40,6 +40,8 @@ public class CrystalCore extends JavaPlugin {
         getCommand("rank").setExecutor(new RankCommand());
         getCommand("rank").setTabCompleter(new RankTabCompleter());
 
+        getCommand("message").setExecutor(new MessageCommand());
+
         // gamemode commands
         getCommand("gamemode").setExecutor(new GamemodeCommand());
         getCommand("gamemode").setTabCompleter(new GamemodeTabCompleter());

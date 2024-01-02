@@ -380,7 +380,7 @@ public class RankManager {
     public void removePermission(String permission, Rank rank) {
         for (Rank r : ranks) {
             if (r.getName().equalsIgnoreCase(rank.getName())) {
-                r.getPermissions().add(permission);
+                r.getPermissions().remove(permission);
                 break;
             }
         }
