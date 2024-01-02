@@ -49,6 +49,10 @@ permissions:
     default: op
   crystalcore.gamemode.adventure:
     default: op
+  crystalcore.heal:
+    default: op
+  crystalcraft.feed:
+    default: op
 
 commands:
   vanish:
@@ -65,6 +69,7 @@ commands:
     description: main rank command
   gamemode:
     description: switch gamemode
+    permission:
     aliases:
       - gm
   gms:
@@ -84,3 +89,5 @@ commands:
       - whisper
   heal:
     description: not even a scratch
+  feed:
+    description: who needs to eat?

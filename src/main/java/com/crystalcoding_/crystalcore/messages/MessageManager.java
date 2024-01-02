@@ -59,6 +59,10 @@ public class MessageManager {
     private final String RankPermissionAddedMessage;
     private final String RankPermissionRemovedMessage;
     private final String DefaultRankChangedMessage;
+    private final String HealedMessage;
+    private final String HealedOtherMessage;
+    private final String FeedMessage;
+    private final String FeedOtherMessage;
 
     public MessageManager(CrystalCore plugin) {
         FileConfiguration config = plugin.getConfig();
@@ -114,6 +118,10 @@ public class MessageManager {
         RankPermissionAddedMessage = color(getFromConfig("messages.RankPermissionAddedMessage", config));
         RankPermissionRemovedMessage = color(getFromConfig("messages.RankPermissionRemovedMessage", config));
         DefaultRankChangedMessage = color(getFromConfig("messages.DefaultRankChangedMessage", config));
+        HealedMessage = color(getFromConfig("messages.HealedMessage", config));
+        HealedOtherMessage = color(getFromConfig("messages.HealedOtherMessage", config));
+        FeedMessage = color(getFromConfig("messages.FeedMessage", config));
+        FeedOtherMessage = color(getFromConfig("messages.FeedOtherMessage", config));
     }
 
     String getFromConfig(String key, FileConfiguration config) {
@@ -308,6 +316,22 @@ public class MessageManager {
 
     public String getDefaultRankChangedMessage(String rank) {
         return DefaultRankChangedMessage.replace("{rank}", rank);
+    }
+
+    public String getHealedMessage() {
+        return HealedMessage;
+    }
+
+    public String getHealedOtherMessage(String player) {
+        return HealedOtherMessage.replace("{player}", player);
+    }
+
+    public String getFeedMessage() {
+        return FeedMessage;
+    }
+
+    public String getFeedOtherMessage(String player) {
+        return FeedOtherMessage.replace("{player}", player);
     }
 
     //endregion

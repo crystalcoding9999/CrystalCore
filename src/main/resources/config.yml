@@ -55,3 +55,7 @@ messages:
   RankPermissionAddedMessage: "{prefix} &aAdded the &r{permission} &apermission to &r{rank}"
   RankPermissionRemovedMessage: "{prefix} &cRemoved the &r{permission} &cpermission from &r{rank}"
   DefaultRankChangedMessage: "{prefix} &aChanged the default rank to the &r{rank} &arank"
+  HealedMessage: "{prefix} &6You have been healed!"
+  HealedOtherMessage: "{prefix} &6Healed &r{player}&6!"
+  FeedMessage: "{prefix} &6You have been fed!"
+  FeedOtherMessage: "{prefix} &6Fed &r{player}&6!"
