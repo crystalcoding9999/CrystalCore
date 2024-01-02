@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.commands;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,19 +12,19 @@ public class NicknameCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
 
         if(!(sender instanceof Player)) {
-            sender.sendMessage(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage());
+            Core.playerOnly(sender);
             return false;
         }
 
         Player p = (Player) sender;
 
         if (!p.hasPermission("crystalcore.nick")) {
-            p.sendMessage(CrystalCore.getInstance().messageManager.getNoPermissionMessage());
+            Core.noPermission(p);
             return false;
         }
 
         if (args.length == 0) {
-            p.sendMessage(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("nick", "<nickname|reset>"));
+            Core.message(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("nick", "<nickname|reset>"), p);
             return false;
         }
 
@@ -31,10 +32,10 @@ public class NicknameCommand implements CommandExecutor {
 
         if (nickname.equalsIgnoreCase("reset")) {
             CrystalCore.getInstance().nameManager.resetNickName(p);
-            p.sendMessage(CrystalCore.getInstance().messageManager.getNicknameResetMessage());
+            Core.message(CrystalCore.getInstance().messageManager.getNicknameResetMessage(), p);
         } else {
             CrystalCore.getInstance().nameManager.setNickName(p, nickname);
-            p.sendMessage(CrystalCore.getInstance().messageManager.getNicknameChangedMessage(nickname));
+            Core.message(CrystalCore.getInstance().messageManager.getNicknameChangedMessage(nickname), p);
         }
 
         return false;

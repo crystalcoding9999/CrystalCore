@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.name;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
 import com.crystalcoding_.crystalcore.ranks.Rank;
@@ -38,7 +39,7 @@ public class NameManager {
 
         String newPlayerName = playerRank.getPrefix() + " " + playerName;
 
-        p.setDisplayName(MessageManager.color(newPlayerName));
+        p.setDisplayName(Core.color(newPlayerName));
     }
 
     public void updatePlayerListName(Player p) {
@@ -55,6 +56,6 @@ public class NameManager {
             newPlayerName = newPlayerName + " &6[Vanished]";
         }
 
-        p.setPlayerListName(MessageManager.color(newPlayerName));
+        p.setPlayerListName(Core.color(newPlayerName));
     }
 }

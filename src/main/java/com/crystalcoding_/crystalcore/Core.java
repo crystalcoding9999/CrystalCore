@@ -342,11 +342,11 @@ public class Core {
 	}
 
 	public static void noPermission(Player p) {
-		p.sendMessage(color("Sorry, but you don't have permission to do that"));
+		p.sendMessage(color(CrystalCore.getInstance().messageManager.getNoPermissionMessage()));
 	}
 
 	public static void noPermission(CommandSender s) {
-		s.sendMessage(color("Sorry, but you don't have permission to do that"));
+		s.sendMessage(color(CrystalCore.getInstance().messageManager.getNoPermissionMessage()));
 	}
 
 	public static void console(String msg) {
@@ -363,5 +363,9 @@ public class Core {
 
 	public static void message(String msg, CommandSender sender) {
 		sender.sendMessage(color(msg));
+	}
+
+	public static void playerOnly(CommandSender sender) {
+		message(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage(), sender);
 	}
 }

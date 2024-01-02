@@ -6,7 +6,7 @@ messages:
 
   prefix: "[&bCC&r]" # can be used in messages using the '{prefix}' placeholder
 
-  # Join Leave messages (placeholder: {player} the target player)
+  # Join Leave messages (placeholder: {player} the target player, {rank} the target players rank)
   JoinMessage: "{prefix} {rank} {player} Has joined the game!"
   LeaveMessage: "{prefix} {rank} {player} Has left the game!"
 
@@ -20,7 +20,9 @@ messages:
 
   # Rank messages (placeholder: {rank} new rank name)
   RankChangedMessage: "{prefix} &aYour rank has been updated to &r{rank}!"
+  RankChangedOtherMessage: "{prefix} &aUpdated &r{player}'s &arank to &r{rank}"
   TempRankChangedMessage: "{prefix} &aYou have temporarily been given the &r{rank} &arank! your rank will revert back once you leave."
+  TempRankChangedOtherMessage: "{prefix} &aTemporarily updated &r{player}'s &arank to &r{rank}"
   RankDeletedMessage: "{prefix} &cThe rank you had has been deleted! you have been reverted to the default rank."
 
   # /nickname messages (placeholder: {nickname} new nickname)
@@ -32,8 +34,20 @@ messages:
   NoPermissionMessage: "{prefix} &cYou don't have permission to do this!" # sent when someone doesn't have the required permissions for a command
   MissingArgumentsMessage: "{prefix} &cMissing arguments! Usage: /{command} {args}"
   RankNotFoundMessage: "{prefix} &cThe &r{rank} &crank does not exist!"
+  RankExistsMessage: "{prefix} &cThe &r{rank} &calready exists!" # sent when someone tries to create a rank with the same name as an existing rank
+  RankIsDefaultMessage: "{prefix} &cYou cannot delete the default rank!" # sent when someone tries to delete the default rank
+  RankAlreadyDefaultMessage: "{prefix} &cThis rank already is the default rank!" # sent when someone tries to set the default rank to the default rank
   PlayerNotFoundMessage: "{prefix} &cPlayer &r{player} &cnot found!"
+  NoColorCodesMessage: "{prefix} &cRank names cannot contain color codes!" # sent when someone tries to use color codes in rank name
+  PermissionNotFoundMessage: "{prefix} &cThe &r{rank} &crank does not have the &r{permission} &cpermission"
+  PermissionAlreadyFoundMessage: "{prefix} &cThe &r{rank} &crank already has the &r{permission} &cpermission"
 
-  # other
+  # Command responses
   GamemodeChangedMessage: "{prefix} &aYour gamemode has been updated to &r{gamemode}"
   GamemodeChangeOtherMessage: "{prefix} &aUpdated &r{player}'s &agamemode to &r{gamemode}"
+  RankCreatedMessage: "{prefix} &aCreated the &r{rank} &arank!"
+  RankDeletedCMDMessage: "{prefix} &cDeleted the &r{rank} &crank!"
+  RankPrefixChangedMessage: "{prefix} &aUpdated &r{rank}'s &aPrefix to &r{rankPrefix}"
+  RankPermissionAddedMessage: "{prefix} &aAdded the &r{permissions} &apermission to &r{rank}"
+  RankPermissionRemovedMessage: "{prefix} &cRemove the &r{permissions} &apermission to &r{rank}"
+  DefaultRankChangedMessage: "{prefix} &aChanged the default rank to the &r{rank} &arank"

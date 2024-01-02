@@ -14,9 +14,25 @@ permissions:
     default: op
   crystalcore.ranks.set:
     default: op
+  crystalcore.rank.set.temporary:
+    default: op
   crystalcore.ranks.addparent:
     default: op
   crystalcore.ranks.removeparent:
+    default: op
+  crystalcore.ranks.info:
+    default: op
+  crystalcore.ranks.create:
+    default: op
+  crystalcore.ranks.delete:
+    default: op
+  crystalcore.ranks.setprefix:
+    default: op
+  crystalcore.ranks.permissions.add:
+    default: op
+  crystalcore.ranks.permissions.remove:
+    default: op
+  crystalcore.ranks.setdefault:
     default: op
   crystalcore.gamemode.*:
     default: op

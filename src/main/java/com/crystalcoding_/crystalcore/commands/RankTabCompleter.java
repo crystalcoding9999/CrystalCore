@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,26 @@ public class RankTabCompleter implements TabCompleter {
 
         if (args.length == 1) {
             completions.add("set");
+            completions.add("settemporary");
+            completions.add("settemp");
             completions.add("list");
             completions.add("addparent");
             completions.add("removeparent");
+            completions.add("create");
+            completions.add("delete");
+            completions.add("remove");
+            completions.add("setprefix");
+            completions.add("addpermission");
+            completions.add("removepermission");
+            completions.add("info");
+            completions.add("setdefault");
             // Add more commands if needed
         } else if (args.length == 2) {
             String subCommand = args[0].toLowerCase();
             switch (subCommand) {
                 case "set":
+                case "settemporary":
+                case "settemp":
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         completions.add(p.getName());
                     }
@@ -44,9 +57,22 @@ public class RankTabCompleter implements TabCompleter {
 
                 case "addparent":
                 case "removeparent":
+                case "info":
+                case "addpermission":
+                case "removepermission":
                     // Logic for completing available ranks
                     for (Rank rank : rankManager.getRanks()) {
                         completions.add(rank.getName());
+                    }
+                    break;
+
+                case "delete":
+                case "remove":
+                case "setdefault":
+                    for (Rank rank : rankManager.getRanks()) {
+                        if (!rankManager.isDefault(rank)) {
+                            completions.add(rank.getName());
+                        }
                     }
                     break;
 
@@ -55,10 +81,29 @@ public class RankTabCompleter implements TabCompleter {
                 default:
                     break;
             }
-        } else if (args.length == 3 && (args[0].equalsIgnoreCase("addparent") || args[0].equalsIgnoreCase("removeparent") || args[0].equalsIgnoreCase("set"))) {
-            // Logic for completing available ranks as parent ranks
-            for (Rank rank : rankManager.getRanks()) {
-                completions.add(rank.getName());
+        } else if (args.length == 3) {
+            String subCommand = args[0].toLowerCase();
+            switch (subCommand) {
+                case "set":
+                case "settemporary":
+                case "settemp":
+                case "addparent":
+                case "removeparent":
+                case "setprefix":
+                    for (Rank rank : rankManager.getRanks()) {
+                        completions.add(rank.getName());
+                    }
+                    break;
+                case "addpermission":
+                    for (Permission permission : CrystalCore.getInstance().getServer().getPluginManager().getPermissions()) {
+                        completions.add(permission.getName());
+                    }
+                case "removepermission":
+                    String rankName = args[1];
+                    Rank rank = rankManager.getRank(rankName);
+                    if (rank != null) {
+                        completions.addAll(rank.getPermissions());
+                    }
             }
         }
 

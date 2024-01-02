@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.commands;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -12,7 +13,7 @@ public class GamemodeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 0 && !(sender instanceof Player)) {
-            sender.sendMessage(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage());
+            Core.playerOnly(sender);
             return false;
         } else if (args.length == 0) {
             Player p = (Player) sender;
@@ -34,7 +35,7 @@ public class GamemodeCommand implements CommandExecutor {
         } else if (args.length == 1) {
             if (command.getName().equalsIgnoreCase("gamemode")) {
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage());
+                    Core.playerOnly(sender);
                     return false;
                 }
                 Player p = (Player) sender;
@@ -53,7 +54,7 @@ public class GamemodeCommand implements CommandExecutor {
                         p.setGameMode(GameMode.ADVENTURE);
                         return true;
                     default:
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("gamemode", "<survival|creative|spectator|adventure> ?player?"));
+                        Core.message(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("gamemode", "<survival|creative|spectator|adventure> ?player?"), p);
                         return false;
                 }
             } else {
@@ -61,26 +62,26 @@ public class GamemodeCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
 
                 if (target == null) {
-                    p.sendMessage(CrystalCore.getInstance().messageManager.getPlayerNotFoundMessage(args[0]));
+                    Core.message(CrystalCore.getInstance().messageManager.getPlayerNotFoundMessage(args[0]), p);
                     return false;
                 }
 
                 switch (command.getName()) {
                     case "gms":
                         target.setGameMode(GameMode.SURVIVAL);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "survival"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "survival"), p);
                         return true;
                     case "gmc":
                         target.setGameMode(GameMode.CREATIVE);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "creative"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "creative"), p);
                         return true;
                     case "gmsp":
                         target.setGameMode(GameMode.SPECTATOR);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "spectator"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "spectator"), p);
                         return true;
                     case "gma":
                         target.setGameMode(GameMode.ADVENTURE);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "adventure"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "adventure"), p);
                         return true;
                 }
             }
@@ -89,7 +90,7 @@ public class GamemodeCommand implements CommandExecutor {
             Player target = Bukkit.getPlayer(args[1]);
 
             if (target == null) {
-                p.sendMessage(CrystalCore.getInstance().messageManager.getPlayerNotFoundMessage(args[1]));
+                Core.message(CrystalCore.getInstance().messageManager.getPlayerNotFoundMessage(args[1]), p);
                 return false;
             }
 
@@ -97,22 +98,22 @@ public class GamemodeCommand implements CommandExecutor {
                 switch (args[0].toLowerCase()) {
                     case "survival":
                         target.setGameMode(GameMode.SURVIVAL);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "survival"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "survival"), p);
                         return true;
                     case "creative":
                         target.setGameMode(GameMode.CREATIVE);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "creative"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "creative"), p);
                         return true;
                     case "spectator":
                         target.setGameMode(GameMode.SPECTATOR);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "spectator"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "spectator"), p);
                         return true;
                     case "adventure":
                         target.setGameMode(GameMode.ADVENTURE);
-                        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "adventure"));
+                        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangeOtherMessage(target.getName(), "adventure"), p);
                         return true;
                     default:
-                        target.sendMessage(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("gamemode", "<survival|creative|spectator|adventure> ?player?"));
+                        Core.message(CrystalCore.getInstance().messageManager.getMissingArgumentsMessage("gamemode", "<survival|creative|spectator|adventure> ?player?"), p);
                         return false;
                 }
             }

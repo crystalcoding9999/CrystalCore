@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.ranks;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
 import org.bukkit.Bukkit;
@@ -22,8 +23,8 @@ import java.util.logging.Level;
 public class RankManager {
     private ArrayList<Rank> ranks;
     private Map<String, Rank> rankMap;
-    private HashMap<UUID, Rank> playerRanks;
-    private HashMap<UUID, Rank> temporaryRanks;
+    private HashMap<UUID, String> playerRanks;
+    private HashMap<UUID, String> temporaryRanks;
     private HashMap<Player, PermissionAttachment> playerAttachments;
     private Rank defaultRank;
 
@@ -53,6 +54,7 @@ public class RankManager {
             return;
         }
 
+        String defaultRankName = ranksConfig.getString("defaultRank");
         ranks = new ArrayList<>();
         ConfigurationSection ranksSection = ranksConfig.getConfigurationSection("ranks");
         if (ranksSection != null) {
@@ -125,6 +127,8 @@ public class RankManager {
     private void saveRanks() {
         FileConfiguration ranksConfig = YamlConfiguration.loadConfiguration(ranksFile);
 
+        ranksConfig.set("defaultRank", defaultRank.getName());
+
         ConfigurationSection ranksSection = ranksConfig.createSection("ranks");
         for (Rank rank : ranks) {
             String rankPath = "ranks." + rank.getName().toLowerCase();
@@ -158,17 +162,32 @@ public class RankManager {
                 UUID uuid = UUID.fromString(key);
                 Rank rank = getRank(playerRanksSection.getString(key));
                 if (rank == null) rank = defaultRank;
-                playerRanks.put(uuid, rank);
+                playerRanks.put(uuid, rank.getName());
             }
         } else {
             ranksConfig.createSection("playerRanks");
         }
     }
 
+    public void savePlayerRanks() {
+        FileConfiguration ranksConfig = YamlConfiguration.loadConfiguration(ranksFile);
+        ConfigurationSection playerRanksSection = ranksConfig.createSection("playerRanks");
+
+        for (UUID uuid : playerRanks.keySet()) {
+            playerRanksSection.set(uuid.toString(), playerRanks.get(uuid));
+        }
+
+        try {
+            ranksConfig.save(ranksFile);
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.SEVERE, "Error saving player ranks to file: " + e.getMessage());
+        }
+    }
+
     public void playerJoined(Player p) {
         UUID u = p.getUniqueId();
         if (!playerRanks.containsKey(u)) {
-            playerRanks.put(u, defaultRank);
+            playerRanks.put(u, defaultRank.getName());
         }
 
         updatePermissions(p);
@@ -195,10 +214,10 @@ public class RankManager {
     public Rank getPlayerRank(UUID uuid) {
         if (uuid != null) {
             if (temporaryRanks.containsKey(uuid)) {
-                return temporaryRanks.get(uuid);
+                return getRank(temporaryRanks.get(uuid));
             }
 
-            Rank playerRank = playerRanks.get(uuid);
+            Rank playerRank = getRank(playerRanks.get(uuid));
             if (playerRank != null) {
                 return playerRank;
             } else {
@@ -206,9 +225,6 @@ public class RankManager {
                 return defaultRank;
             }
         }
-
-        // If no rank found, return a default rank or handle it appropriately
-        // Example: return defaultRank;
 
         return null; // Or return null if no default rank is set
     }
@@ -222,13 +238,14 @@ public class RankManager {
     }
 
     public void setRank(UUID u, Rank r, boolean t) {
-        playerRanks.put(u, r);
+        playerRanks.put(u, r.getName());
         Player p = Bukkit.getPlayer(u);
         if (p != null) {
             CrystalCore.getInstance().nameManager.updateDisplayName(p);
             CrystalCore.getInstance().nameManager.updatePlayerListName(p);
             updatePermissions(p);
-            if (t) p.sendMessage(CrystalCore.getInstance().messageManager.getRankChangedMessage(r));
+            if (t) Core.message(CrystalCore.getInstance().messageManager.getRankChangedMessage(r), p);
+            savePlayerRanks();
         }
     }
 
@@ -237,13 +254,13 @@ public class RankManager {
     }
 
     public void setTemporaryRank(UUID u, Rank r) {
-        temporaryRanks.put(u, r);
+        temporaryRanks.put(u, r.getName());
         Player p = Bukkit.getPlayer(u);
         if (p != null) {
             CrystalCore.getInstance().nameManager.updateDisplayName(Bukkit.getPlayer(u));
             CrystalCore.getInstance().nameManager.updatePlayerListName(Bukkit.getPlayer(u));
             updatePermissions(p);
-            p.sendMessage(CrystalCore.getInstance().messageManager.getTempRankChangedMessage(r));
+            Core.message(CrystalCore.getInstance().messageManager.getTempRankChangedMessage(r), p);
         }
     }
 
@@ -254,6 +271,7 @@ public class RankManager {
 
         ranks.add(r);
         rankMap.put(r.getName().toLowerCase(), r); // Store rank in the rankMap for quicker lookup
+        saveRanks();
     }
 
     public synchronized void removeRank(Rank r) {
@@ -261,6 +279,7 @@ public class RankManager {
             throw new IllegalArgumentException("Cannot delete the default rank!");
         }
         removeRank(r.getName());
+        saveRanks();
     }
 
     private synchronized void removeRank(String rankName) {
@@ -281,11 +300,11 @@ public class RankManager {
         }
 
         for (UUID uuid : playerRanks.keySet()) {
-            if (playerRanks.get(uuid).getName().equalsIgnoreCase(rankName)) {
+            if (playerRanks.get(uuid).equalsIgnoreCase(rankName)) {
                 setRank(uuid, defaultRank);
                 Player p = Bukkit.getPlayer(uuid);
                 if (p != null) {
-                    p.sendMessage(CrystalCore.getInstance().messageManager.getRankDeletedMessage());
+                    Core.message(CrystalCore.getInstance().messageManager.getRankDeletedMessage(), p);
                 }
             }
         }
@@ -354,6 +373,30 @@ public class RankManager {
         }
     }
 
+    public void removePermission(Permission permission, Rank rank) {
+        removePermission(permission.getName(), rank);
+    }
+
+    public void removePermission(String permission, Rank rank) {
+        for (Rank r : ranks) {
+            if (r.getName().equalsIgnoreCase(rank.getName())) {
+                r.getPermissions().add(permission);
+                break;
+            }
+        }
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            updatePermissions(p);
+        }
+    }
+
+    public void removePermission(String permission, String rank) {
+        Rank r = getRank(rank);
+        if (r != null) {
+            removePermission(permission, r);
+        }
+    }
+
     public void addParentRank(String rankName, String parentName) {
         Rank rank = getRank(rankName);
         Rank parent = getRank(parentName);
@@ -377,6 +420,50 @@ public class RankManager {
                 updatePermissions(p);
             }
         }
+    }
+
+    public void setPrefix(String rankName, String prefix) {
+        // Update the prefix for the specified rank in your ranks list or map
+        Rank rankToUpdate = getRank(rankName);
+        if (rankToUpdate == null) {
+            return;
+        }
+
+        rankToUpdate.setPrefix(Core.color(prefix));
+
+        // Iterate through the playerRanks map
+        for (Map.Entry<UUID, String> entry : playerRanks.entrySet()) {
+            UUID uuid = entry.getKey();
+            String playerRankName = entry.getValue();
+
+            if (playerRankName.equalsIgnoreCase(rankName)) {
+                Player player = Bukkit.getPlayer(uuid);
+                if (player != null && player.isOnline()) {
+                    // Update the display name for the online player
+                    if (playerRankName.equalsIgnoreCase(rankName)) {
+                        CrystalCore.getInstance().nameManager.updatePlayerListName(player);
+                        CrystalCore.getInstance().nameManager.updateDisplayName(player);
+                    }
+                }
+            }
+        }
+    }
+
+    public void setDefaultRank(String rank) {
+        if (getRank(rank) == null) return;
+        defaultRank = getRank(rank);
+    }
+
+    public  void setDefaultRank(Rank rank) {
+        defaultRank = rank;
+    }
+
+    public boolean isDefault(String rankName) {
+        return defaultRank.getName().equalsIgnoreCase(rankName);
+    }
+
+    public boolean isDefault(Rank rank) {
+        return defaultRank.getName().equalsIgnoreCase(rank.getName());
     }
 
     public ArrayList<Rank> getRanks() {

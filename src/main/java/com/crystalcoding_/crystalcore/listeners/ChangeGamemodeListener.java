@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.listeners;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,6 +21,6 @@ public class ChangeGamemodeListener implements Listener {
     public void onGamemodeChange(PlayerGameModeChangeEvent e) {
         Player p = e.getPlayer();
 
-        p.sendMessage(CrystalCore.getInstance().messageManager.getGamemodeChangedMessage(e.getNewGameMode().toString().toLowerCase()));
+        Core.message(CrystalCore.getInstance().messageManager.getGamemodeChangedMessage(e.getNewGameMode().toString().toLowerCase()), p);
     }
 }

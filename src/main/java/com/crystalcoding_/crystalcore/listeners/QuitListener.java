@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.listeners;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class QuitListener implements Listener {
             plugin.getLogger().info(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p));
             for (Player op : Bukkit.getOnlinePlayers()) {
                 if (op.hasPermission("crystalcore.vanish")) {
-                    op.sendMessage(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p));
+                    Core.message(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p), op);
                 }
             }
         } else {

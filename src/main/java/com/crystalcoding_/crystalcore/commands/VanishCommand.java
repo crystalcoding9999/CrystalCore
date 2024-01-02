@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.commands;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
 import org.bukkit.Bukkit;
@@ -13,19 +14,19 @@ public class VanishCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage());
+            Core.message(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage(), sender);
             return false;
         }
 
         Player p = (Player) sender;
 
         if (!(p.hasPermission("crystalcore.vanish"))) {
-            p.sendMessage(CrystalCore.getInstance().messageManager.getNoPermissionMessage());
+            Core.message(CrystalCore.getInstance().messageManager.getNoPermissionMessage(), p);
             return false;
         }
 
         if (CrystalCore.getInstance().vanishManager.isVanished(p)) {
-            p.sendMessage(CrystalCore.getInstance().messageManager.getSelfUnvanishMessage());
+            Core.message(CrystalCore.getInstance().messageManager.getSelfUnvanishMessage(), p);
             CrystalCore.getInstance().vanishManager.setVanished(p, false);
 
             for (Player op : Bukkit.getOnlinePlayers()) {
@@ -33,14 +34,14 @@ public class VanishCommand implements CommandExecutor {
                     continue;
                 }
                 if (op.hasPermission("crystalcore.vanish")) {
-                    op.sendMessage(CrystalCore.getInstance().messageManager.getOtherUnvanishMessage(p));
+                    Core.message(CrystalCore.getInstance().messageManager.getOtherUnvanishMessage(p), op);
                 } else {
                     op.showPlayer(CrystalCore.getInstance(), p);
-                    op.sendMessage(CrystalCore.getInstance().messageManager.getJoinMessage(p));
+                    Core.message(CrystalCore.getInstance().messageManager.getJoinMessage(p), op);
                 }
             }
         } else {
-            p.sendMessage(CrystalCore.getInstance().messageManager.getSelfVanishMessage());
+            Core.message(CrystalCore.getInstance().messageManager.getSelfVanishMessage(), p);
             CrystalCore.getInstance().vanishManager.setVanished(p, true);
 
             for (Player op : Bukkit.getOnlinePlayers()) {
@@ -48,10 +49,10 @@ public class VanishCommand implements CommandExecutor {
                     continue;
                 }
                 if (op.hasPermission("crystalcore.vanish")) {
-                    op.sendMessage(CrystalCore.getInstance().messageManager.getOtherVanishMessage(p));
+                    Core.message(CrystalCore.getInstance().messageManager.getOtherVanishMessage(p), op);
                 } else {
                     op.hidePlayer(CrystalCore.getInstance(), p);
-                    op.sendMessage(CrystalCore.getInstance().messageManager.getLeaveMessage(p));
+                    Core.message(CrystalCore.getInstance().messageManager.getLeaveMessage(p), op);
                 }
             }
         }

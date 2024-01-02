@@ -8,6 +8,7 @@ import com.crystalcoding_.crystalcore.messages.MessageManager;
 import com.crystalcoding_.crystalcore.name.NameManager;
 import com.crystalcoding_.crystalcore.ranks.RankManager;
 import com.crystalcoding_.crystalcore.vanish.VanishManager;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CrystalCore extends JavaPlugin {
@@ -51,6 +52,10 @@ public class CrystalCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        for (Player p : vanishManager.getVanishedPlayers()) {
+            Core.message(messageManager.getPrefix() + " &cWarning! the CrystalCore plugin has been disabled!", p);
+            Core.message(messageManager.getPrefix() + " &cYou will not be able to unvanish and you will be visible to players that join!", p);
+        }
     }
 
     public static CrystalCore getInstance() {

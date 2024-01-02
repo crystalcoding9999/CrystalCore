@@ -18,12 +18,16 @@ public class Rank {
         this();
         this.name = name;
         this.prefix = name;
+        this.permissions = new ArrayList<>();
+        this.parents = new ArrayList<>();
     }
 
     public Rank(String name, String prefix) {
         this();
         this.name = name;
         this.prefix = prefix;
+        this.permissions = new ArrayList<>();
+        this.parents = new ArrayList<>();
     }
 
     public Rank(String name, String prefix, List<String> permissions) {
@@ -31,6 +35,7 @@ public class Rank {
         this.name = name;
         this.prefix = prefix;
         this.permissions = permissions;
+        this.parents = new ArrayList<>();
     }
 
     public Rank(String name, String prefix, List<String> permissions, List<String> parents) {
