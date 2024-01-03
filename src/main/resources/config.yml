@@ -33,6 +33,11 @@ messages:
   DirectMessageSentMessage: "&6[&r{sender} &6->&r {receiver}&6] &r{message}"
   DirectMessageReceivedMessage: "&6[&r{receiver} &6<-&r {sender}&6] &r{message}"
 
+  # staffchat related
+  StaffChatEnabledMessage: "{prefix} &aEnabled staff chat!"
+  StaffChatDisabledMessage: "{prefix} &cDisabled staff chat!"
+  StaffChatMessage: "{prefix} [&bStaffChat&r] {rank} {player}: {message}"
+
   # Command error messages
   PlayerOnlyMessage: "{prefix} &cOnly players can execute this command!" # sent when console uses a player only command
   NoPermissionMessage: "{prefix} &cYou don't have permission to do this!" # sent when someone doesn't have the required permissions for a command

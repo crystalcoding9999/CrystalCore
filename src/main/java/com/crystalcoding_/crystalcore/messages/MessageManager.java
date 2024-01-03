@@ -36,6 +36,11 @@ public class MessageManager {
     private final String DirectMessageSentMessage;
     private final String DirectMessageReceivedMessage;
 
+    // Staffchat related Messages
+    private final String StaffChatEnabledMessage;
+    private final String StaffChatDisabledMessage;
+    private final String StaffChatMessage;
+
 
     // Command error messages
     private final String PlayerOnlyMessage;
@@ -100,6 +105,11 @@ public class MessageManager {
         // Message command Messages
         DirectMessageSentMessage = color(getFromConfig("messages.DirectMessageSentMessage", config));
         DirectMessageReceivedMessage = color(getFromConfig("messages.DirectMessageReceivedMessage", config));
+
+        // Staffchat related Messages
+        StaffChatEnabledMessage = color(getFromConfig("messages.StaffChatEnabledMessage", config));
+        StaffChatDisabledMessage = color(getFromConfig("messages.StaffChatDisabledMessage", config));
+        StaffChatMessage = color(getFromConfig("messages.StaffChatMessage", config));
 
         // Command error messages
         NoPermissionMessage = color(getFromConfig("messages.NoPermissionMessage", config));
@@ -237,6 +247,22 @@ public class MessageManager {
         return DirectMessageReceivedMessage.replace("{sender}", sender).replace("{receiver}", receiver).replace("{message}", message);
     }
 
+
+    //endregion
+
+    //region staffchat related
+
+    public String getStaffChatEnabledMessage() {
+        return StaffChatEnabledMessage;
+    }
+
+    public String getStaffChatDisabledMessage() {
+        return StaffChatDisabledMessage;
+    }
+
+    public String getStaffChatMessage(String player, String rank, String message) {
+        return StaffChatMessage.replace("{player}", player).replace("{rank}", rank).replace("{message}", message);
+    }
 
     //endregion
 

@@ -55,6 +55,8 @@ permissions:
     default: op
   crystalcore.fly:
     default: op
+  crystalcore.staffchat:
+    default: op
 
 commands:
   vanish:
@@ -95,3 +97,5 @@ commands:
     description: who needs to eat?
   fly:
     description: i believe i can fly
+  staffchat:
+    description: sssh no one can hear us
