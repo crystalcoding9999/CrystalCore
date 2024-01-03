@@ -1,10 +1,7 @@
 package com.crystalcoding_.crystalcore;
 
 import com.crystalcoding_.crystalcore.commands.*;
-import com.crystalcoding_.crystalcore.listeners.ChangeGamemodeListener;
-import com.crystalcoding_.crystalcore.listeners.ChatListener;
-import com.crystalcoding_.crystalcore.listeners.JoinListener;
-import com.crystalcoding_.crystalcore.listeners.QuitListener;
+import com.crystalcoding_.crystalcore.listeners.*;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
 import com.crystalcoding_.crystalcore.name.NameManager;
 import com.crystalcoding_.crystalcore.ranks.RankManager;
@@ -45,6 +42,8 @@ public class CrystalCore extends JavaPlugin {
         getCommand("rank").setExecutor(new RankCommand());
         getCommand("rank").setTabCompleter(new RankTabCompleter());
         getCommand("staffchat").setExecutor(new StaffchatCommand());
+        getCommand("invsee").setExecutor(new InvseeCommand());
+        getCommand("invsee").setTabCompleter(new AllPlayersTabCompleter());
 
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("message").setTabCompleter(new AllPlayersTabCompleter());

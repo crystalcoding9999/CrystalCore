@@ -57,6 +57,8 @@ permissions:
     default: op
   crystalcore.staffchat:
     default: op
+  crystalcore.invsee:
+    default: op
 
 commands:
   vanish:
@@ -99,3 +101,5 @@ commands:
     description: i believe i can fly
   staffchat:
     description: sssh no one can hear us
+  invsee:
+    description: lets see what you got

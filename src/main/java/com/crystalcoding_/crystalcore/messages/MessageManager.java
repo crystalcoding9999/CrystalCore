@@ -54,6 +54,7 @@ public class MessageManager {
     private final String NoColorCodesMessage;
     private final String PermissionNotFoundMessage;
     private final String PermissionAlreadyFoundMessage;
+    private final String SomethingWentWrongMessage;
 
     // Command Responses
     private final String GamemodeChangedMessage;
@@ -122,6 +123,7 @@ public class MessageManager {
         NoColorCodesMessage = color(getFromConfig("messages.NoColorCodesMessage", config));
         PermissionNotFoundMessage = color(getFromConfig("messages.PermissionNotFoundMessage", config));
         PermissionAlreadyFoundMessage = color(getFromConfig("messages.PermissionAlreadyFoundMessage", config));
+        SomethingWentWrongMessage = color(getFromConfig("messages.SomethingWentWrongMessage", config));
 
         // Command Responses
         GamemodeChangedMessage = color(getFromConfig("messages.GamemodeChangedMessage", config));
@@ -314,6 +316,10 @@ public class MessageManager {
 
     public String getPermissionAlreadyFoundMessage(String rank, String permission) {
         return PermissionAlreadyFoundMessage.replace("{rank}", rank).replace("{permission}", permission);
+    }
+
+    public String getSomethingWentWrongMessage() {
+        return SomethingWentWrongMessage;
     }
 
     //endregion

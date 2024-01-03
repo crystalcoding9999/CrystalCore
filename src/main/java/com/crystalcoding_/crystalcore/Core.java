@@ -368,4 +368,12 @@ public class Core {
 	public static void playerOnly(CommandSender sender) {
 		message(CrystalCore.getInstance().messageManager.getPlayerOnlyMessage(), sender);
 	}
+
+	public static void somethingWentWrong(CommandSender sender) {
+		message(CrystalCore.getInstance().messageManager.getSomethingWentWrongMessage(), sender);
+	}
+
+	public static void somethingWentWrong(Player player) {
+		message(CrystalCore.getInstance().messageManager.getSomethingWentWrongMessage(), player);
+	}
 }

@@ -50,6 +50,7 @@ messages:
   NoColorCodesMessage: "{prefix} &cRank names cannot contain color codes!" # sent when someone tries to use color codes in rank name
   PermissionNotFoundMessage: "{prefix} &cThe &r{rank} &crank does not have the &r{permission} &cpermission"
   PermissionAlreadyFoundMessage: "{prefix} &cThe &r{rank} &crank already has the &r{permission} &cpermission"
+  SomethingWentWrongMessage: "{prefix} &cSomething went wrong!"
 
   # Command responses
   GamemodeChangedMessage: "{prefix} &aYour gamemode has been updated to &r{gamemode}"
