@@ -1,20 +1,10 @@
-header-footer:
-  header:
-    - ""
-    - "&3&lServer name"
-    - ""
-    - "Online Players: {onlineplayers}"
-    - ""
-  footer:
-    - ""
-    - "&7Visit our webpage"
-    - ""
-
-
-
-#Placeholders:
-#{onlineplayers}
-
-
-
-
+header:
+  - "&6Welcome to the Server!"
+  - "&eThere are currently {onlineplayers} players online."
+  - "" # Empty line
+  - "&aJoin the fun and invite your friends!"
+footer:
+  - "&bThanks for playing!"
+  - "&3Online players: {onlineplayers}"
+  - "" # Empty line
+  - "" # Empty line
