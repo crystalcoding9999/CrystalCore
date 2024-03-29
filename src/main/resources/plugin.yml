@@ -2,7 +2,7 @@ name: CrystalCore
 version: '${project.version}'
 main: com.crystalcoding_.crystalcore.CrystalCore
 api-version: '1.20'
-authors: [crystalcoding_]
+authors: [crystalcoding_, qSox_]
 description: a core plugin for servers
 prefix: CrystalCore
 permissions:
@@ -75,7 +75,6 @@ commands:
     description: main rank command
   gamemode:
     description: switch gamemode
-    permission:
     aliases:
       - gm
   gms:

@@ -72,3 +72,14 @@ messages:
   FlightOnOtherMessage: "{prefix} &aEnabled &6fly mode for &r{player}"
   FlightOffMessage: "{prefix} &6Fly mode &cDisabled"
   FlightOffOtherMessage: "{prefix} &cDisabled &6fly mode for &r{player}"
+
+
+modules:
+  homes:
+    enabled: true
+    limits: # the amount of homes a player can have. will ALWAYS take the highest amount if multiple are assigned
+      crystalcore.homes.1: 1
+      crystalcore.homes.2: 2
+      crystalcore.homes.3: 3
+      crystalcore.homes.4: 4
+      crystalcore.homes.5: 5
