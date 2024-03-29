@@ -67,7 +67,7 @@ public class CrystalCore extends JavaPlugin {
         getCommand("night").setExecutor(new TimeCommand());
 
 
-        tablistManager = new TablistManager();
+        tablistManager = new TablistManager(this);
         tablistManager.enableTablist();
     }
 
