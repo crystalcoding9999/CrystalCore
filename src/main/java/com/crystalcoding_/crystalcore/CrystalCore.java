@@ -72,7 +72,7 @@ public class CrystalCore extends JavaPlugin {
         getCommand("home").setExecutor(new HomeCommand());
         getCommand("home").setTabCompleter(new HomeTabCompleter());
 
-        tablistManager = new TablistManager();
+        tablistManager = new TablistManager(this);
         tablistManager.enableTablist();
     }
 
