@@ -1,7 +1,6 @@
 package com.crystalcoding_.crystalcore;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class TablistManager {
@@ -13,14 +12,19 @@ public class TablistManager {
     }
 
     private void updateTablist() {
-        int onlinePlayers = Bukkit.getOnlinePlayers().size();
+        int onlinePlayers = Bukkit.getOnlinePlayers().size() - CrystalCore.getInstance().vanishManager.getVanishedPlayers().size();
 
-        String header = ChatColor.translateAlternateColorCodes('&', "&eWelcome to the Server!");
-        String footer = ChatColor.translateAlternateColorCodes('&', "&aOnline Players: &f" + onlinePlayers);
+        String header = Core.color("&eWelcome to the Server!");
+        String footer = Core.color("&aOnline Players: &f" + onlinePlayers);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setPlayerListHeader(header);
-            player.setPlayerListFooter(footer);
+
+            if (player.hasPermission("crystalcore.vanish")) {
+                footer = footer + "\n&7Vanished people: " + CrystalCore.getInstance().vanishManager.getVanishedPlayers().size();
+            }
+
+            player.setPlayerListFooter(Core.color(footer));
         }
     }
 }

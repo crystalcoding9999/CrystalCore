@@ -1,6 +1,7 @@
 package com.crystalcoding_.crystalcore;
 
 import com.crystalcoding_.crystalcore.commands.*;
+import com.crystalcoding_.crystalcore.homes.HomeManager;
 import com.crystalcoding_.crystalcore.listeners.*;
 import com.crystalcoding_.crystalcore.messages.MessageManager;
 import com.crystalcoding_.crystalcore.name.NameManager;
@@ -18,6 +19,7 @@ public class CrystalCore extends JavaPlugin {
     public NameManager nameManager;
     public StaffchatManager staffchatManager;
     public TablistManager tablistManager;
+    public HomeManager homeManager;
     private static CrystalCore instance;
 
     @Override
@@ -32,6 +34,7 @@ public class CrystalCore extends JavaPlugin {
         rankManager = new RankManager(this);
         messageManager = new MessageManager(this);
         staffchatManager = new StaffchatManager();
+        homeManager = new HomeManager(this);
 
         new JoinListener(this);
         new QuitListener(this);
@@ -66,6 +69,8 @@ public class CrystalCore extends JavaPlugin {
         getCommand("day").setExecutor(new TimeCommand());
         getCommand("night").setExecutor(new TimeCommand());
 
+        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("home").setTabCompleter(new HomeTabCompleter());
 
         tablistManager = new TablistManager();
         tablistManager.enableTablist();

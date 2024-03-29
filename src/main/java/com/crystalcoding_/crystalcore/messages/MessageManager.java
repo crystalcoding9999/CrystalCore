@@ -60,20 +60,31 @@ public class MessageManager {
     // Command Responses
     private final String GamemodeChangedMessage;
     private final String GamemodeChangeOtherMessage;
+
     private final String RankCreatedMessage;
     private final String RankDeletedCMDMessage;
     private final String RankPrefixChangedMessage;
     private final String RankPermissionAddedMessage;
     private final String RankPermissionRemovedMessage;
     private final String DefaultRankChangedMessage;
+
     private final String HealedMessage;
     private final String HealedOtherMessage;
     private final String FeedMessage;
     private final String FeedOtherMessage;
+
     private final String FlightOnMessage;
     private final String FlightOnOtherMessage;
     private final String FlightOffMessage;
     private final String FlightOffOtherMessage;
+
+    private final String HomeNoneMessage;
+    private final String HomeLimitMessage;
+    private final String HomeCreateMessage;
+    private final String HomeExistsMessage;
+    private final String HomeDeleteMessage;
+    private final String HomeNotExistMessage;
+    private final String HomeTeleportMessage;
 
     public MessageManager(CrystalCore plugin) {
         FileConfiguration config = plugin.getConfig();
@@ -130,20 +141,31 @@ public class MessageManager {
         // Command Responses
         GamemodeChangedMessage = color(getFromConfig("messages.GamemodeChangedMessage", config));
         GamemodeChangeOtherMessage = color(getFromConfig("messages.GamemodeChangeOtherMessage", config));
+
         RankCreatedMessage = color(getFromConfig("messages.RankCreatedMessage", config));
         RankDeletedCMDMessage = color(getFromConfig("messages.RankDeletedCMDMessage", config));
         RankPrefixChangedMessage = color(getFromConfig("messages.RankPrefixChangedMessage", config));
         RankPermissionAddedMessage = color(getFromConfig("messages.RankPermissionAddedMessage", config));
         RankPermissionRemovedMessage = color(getFromConfig("messages.RankPermissionRemovedMessage", config));
         DefaultRankChangedMessage = color(getFromConfig("messages.DefaultRankChangedMessage", config));
+
         HealedMessage = color(getFromConfig("messages.HealedMessage", config));
         HealedOtherMessage = color(getFromConfig("messages.HealedOtherMessage", config));
         FeedMessage = color(getFromConfig("messages.FeedMessage", config));
+
         FeedOtherMessage = color(getFromConfig("messages.FeedOtherMessage", config));
         FlightOnMessage = color(getFromConfig("messages.FlightOnMessage", config));
         FlightOnOtherMessage = color(getFromConfig("messages.FlightOnOtherMessage", config));
         FlightOffMessage = color(getFromConfig("messages.FlightOffMessage", config));
         FlightOffOtherMessage = color(getFromConfig("messages.FlightOffOtherMessage", config));
+
+        HomeNoneMessage = color(getFromConfig("messages.HomeNoneMessage", config));
+        HomeLimitMessage = color(getFromConfig("messages.HomeLimitMessage", config));
+        HomeCreateMessage = color(getFromConfig("messages.HomeCreateMessage", config));
+        HomeExistsMessage = color(getFromConfig("messages.HomeExistsMessage", config));
+        HomeDeleteMessage = color(getFromConfig("messages.HomeDeleteMessage", config));
+        HomeNotExistMessage = color(getFromConfig("messages.HomeNotExistMessage", config));
+        HomeTeleportMessage = color(getFromConfig("messages.HomeTeleportMessage", config));
     }
 
     String getFromConfig(String key, FileConfiguration config) {
@@ -394,6 +416,34 @@ public class MessageManager {
 
     public String getFlightOffOtherMessage(String player) {
         return FlightOffOtherMessage.replace("{player}", player);
+    }
+
+    public String getHomeLimitMessage() {
+        return HomeLimitMessage;
+    }
+
+    public String getHomeNoneMessage() {
+        return HomeNoneMessage;
+    }
+
+    public String getHomeCreateMessage(String home) {
+        return HomeCreateMessage.replace("{home}", home);
+    }
+
+    public String getHomeExistsMessage(String home) {
+        return HomeExistsMessage.replace("{home}", home);
+    }
+
+    public String getHomeDeleteMessage(String home) {
+        return HomeDeleteMessage.replace("{home}", home);
+    }
+
+    public String getHomeNotExistMessage(String home) {
+        return HomeNotExistMessage.replace("{home}", home);
+    }
+
+    public String getHomeTeleportMessage(String home) {
+        return HomeTeleportMessage.replace("{home}", home);
     }
 
     //endregion

@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class QuitListener implements Listener {
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
     public QuitListener(JavaPlugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -23,7 +23,7 @@ public class QuitListener implements Listener {
 
         if (CrystalCore.getInstance().vanishManager.isVanished(p)) {
             e.setQuitMessage(null);
-            plugin.getLogger().info(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p));
+            plugin.getLogger().info(Core.color(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p)));
             for (Player op : Bukkit.getOnlinePlayers()) {
                 if (op.hasPermission("crystalcore.vanish")) {
                     Core.message(CrystalCore.getInstance().messageManager.getSilentLeaveMessage(p), op);

@@ -1,3 +1,4 @@
+
 messages:
   # Placeholders:
   # {prefix}: reference to the prefix message set below
@@ -58,28 +59,39 @@ messages:
   # Command responses
   GamemodeChangedMessage: "{prefix} &aYour gamemode has been updated to &r{gamemode}"
   GamemodeChangeOtherMessage: "{prefix} &aUpdated &r{player}'s &agamemode to &r{gamemode}"
+
   RankCreatedMessage: "{prefix} &aCreated the &r{rank} &arank!"
   RankDeletedCMDMessage: "{prefix} &cDeleted the &r{rank} &crank!"
   RankPrefixChangedMessage: "{prefix} &aUpdated &r{rank}'s &aPrefix to &r{rankPrefix}"
   RankPermissionAddedMessage: "{prefix} &aAdded the &r{permission} &apermission to &r{rank}"
   RankPermissionRemovedMessage: "{prefix} &cRemoved the &r{permission} &cpermission from &r{rank}"
   DefaultRankChangedMessage: "{prefix} &aChanged the default rank to the &r{rank} &arank"
+
   HealedMessage: "{prefix} &6You have been healed!"
   HealedOtherMessage: "{prefix} &6Healed &r{player}&6!"
   FeedMessage: "{prefix} &6You have been fed!"
   FeedOtherMessage: "{prefix} &6Fed &r{player}&6!"
+
   FlightOnMessage: "{prefix} &6Fly mode &aEnabled"
   FlightOnOtherMessage: "{prefix} &aEnabled &6fly mode for &r{player}"
   FlightOffMessage: "{prefix} &6Fly mode &cDisabled"
   FlightOffOtherMessage: "{prefix} &cDisabled &6fly mode for &r{player}"
+
+  HomeNoneMessage: "{prefix} &cYou don't have any homes!"
+  HomeLimitMessage: "{prefix} &cYou already have the maximum amount of homes you can have!"
+  HomeCreateMessage: "{prefix} &aCreated home &r{home}&a!"
+  HomeExistsMessage: "{prefix} &cYou already have a home called &r{home}&c!"
+  HomeDeleteMessage: "{prefix} &cDeleted home &r{home}&c!"
+  HomeNotExistMessage: "{prefix} &cYou don't have a home called &r{home}&c!"
+  HomeTeleportMessage: "{prefix} &aTeleported to home {home}&a!"
 
 
 modules:
   homes:
     enabled: true
     limits: # the amount of homes a player can have. will ALWAYS take the highest amount if multiple are assigned
-      crystalcore.homes.1: 1
-      crystalcore.homes.2: 2
-      crystalcore.homes.3: 3
-      crystalcore.homes.4: 4
-      crystalcore.homes.5: 5
+      1: 1 # usage: crystalcore.homes.limit.1
+      2: 2 # usage: crystalcore.homes.limit.2
+      3: 3 # usage: crystalcore.homes.limit.3
+      4: 4 # usage: crystalcore.homes.limit.4
+      5: 5 # usage: crystalcore.homes.limit.5

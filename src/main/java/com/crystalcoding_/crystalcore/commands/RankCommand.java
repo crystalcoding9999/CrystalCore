@@ -98,7 +98,7 @@ public class RankCommand implements CommandExecutor {
                                 } else {
                                     Core.message("&aParents: ", player);
                                     for (int p = 0; p < rank.getParents().size(); p++) {
-                                        Core.message("&a" + (p+1) + ". &r" + rank.getParents().get(p), player);
+                                        Core.message("&r" + (p+1) + ". &r" + rank.getParents().get(p), player);
                                     }
                                 }
                             }
@@ -108,10 +108,10 @@ public class RankCommand implements CommandExecutor {
                                 Core.message("&aPermissions: ", player);
                                 for (int p = 0; p < rank.getPermissions().size(); p++) {
                                     String permission = rank.getPermissions().get(p);
-                                    if (!permission.startsWith("!")) {
-                                        Core.message("&a" + (p+1) + ". &a" + rank.getPermissions().get(p), player);
+                                    if (permission.startsWith("!")) {
+                                        Core.message("&r" + (p+1) + ". &c" + rank.getPermissions().get(p), player);
                                     } else {
-                                        Core.message("&a" + (p+1) + ". &c" + rank.getPermissions().get(p), player);
+                                        Core.message("&r" + (p+1) + ". &a" + rank.getPermissions().get(p), player);
                                     }
                                 }
                             }

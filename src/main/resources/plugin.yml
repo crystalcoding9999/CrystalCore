@@ -108,3 +108,5 @@ commands:
   night:
       description: Set time to night
       usage: /night
+  home:
+    description: time to leave

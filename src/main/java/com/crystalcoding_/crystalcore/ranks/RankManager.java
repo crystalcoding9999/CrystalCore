@@ -2,9 +2,7 @@ package com.crystalcoding_.crystalcore.ranks;
 
 import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
-import com.crystalcoding_.crystalcore.messages.MessageManager;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,9 +12,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -80,6 +76,8 @@ public class RankManager {
         // If default rank is not found, set the first rank as default
         if (defaultRank == null && !ranks.isEmpty()) {
             defaultRank = ranks.get(0);
+            setDefaultRank(defaultRank);
+            CrystalCore.getInstance().getLogger().warning("No default rank found! defaulting to " + defaultRank.getName());
         }
     }
 
@@ -356,7 +354,7 @@ public class RankManager {
     public void addPermission(String permission, Rank rank) {
         for (Rank r : ranks) {
             if (r.getName().equalsIgnoreCase(rank.getName())) {
-                r.getPermissions().add(permission);
+                if (!r.getPermissions().contains(permission)) r.getPermissions().add(permission);
                 break;
             }
         }
@@ -364,6 +362,8 @@ public class RankManager {
         for (Player p : Bukkit.getOnlinePlayers()) {
             updatePermissions(p);
         }
+
+        saveRanks();
     }
 
     public void addPermission(String permission, String rank) {
@@ -430,6 +430,7 @@ public class RankManager {
         }
 
         rankToUpdate.setPrefix(Core.color(prefix));
+        saveRanks();
 
         // Iterate through the playerRanks map
         for (Map.Entry<UUID, String> entry : playerRanks.entrySet()) {
@@ -452,10 +453,12 @@ public class RankManager {
     public void setDefaultRank(String rank) {
         if (getRank(rank) == null) return;
         defaultRank = getRank(rank);
+        saveRanks();
     }
 
     public  void setDefaultRank(Rank rank) {
         defaultRank = rank;
+        saveRanks();
     }
 
     public boolean isDefault(String rankName) {

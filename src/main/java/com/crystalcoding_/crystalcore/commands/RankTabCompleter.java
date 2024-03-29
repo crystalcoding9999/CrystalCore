@@ -66,6 +66,12 @@ public class RankTabCompleter implements TabCompleter {
                     }
                     break;
 
+                case "setprefix":
+                    for (Rank rank : rankManager.getRanks()) {
+                        completions.add(rank.getName());
+                    }
+                    break;
+
                 case "delete":
                 case "remove":
                 case "setdefault":
@@ -89,11 +95,6 @@ public class RankTabCompleter implements TabCompleter {
                 case "settemp":
                 case "addparent":
                 case "removeparent":
-                case "setprefix":
-                    for (Rank rank : rankManager.getRanks()) {
-                        completions.add(rank.getName());
-                    }
-                    break;
                 case "addpermission":
                     for (Permission permission : CrystalCore.getInstance().getServer().getPluginManager().getPermissions()) {
                         completions.add(permission.getName());

@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class JoinListener implements Listener {
-    private JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
     public JoinListener(JavaPlugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -26,7 +26,7 @@ public class JoinListener implements Listener {
         if (p.hasPermission("crystalcore.vanish")) {
             CrystalCore.getInstance().vanishManager.setVanished(p, true);
             e.setJoinMessage(null);
-            plugin.getLogger().info(CrystalCore.getInstance().messageManager.getSilentJoinMessage(p));
+            plugin.getLogger().info(Core.color(CrystalCore.getInstance().messageManager.getSilentJoinMessage(p)));
             for (Player op : Bukkit.getOnlinePlayers()) {
                 if (op.hasPermission("crystalcore.vanish")) {
                     Core.message(CrystalCore.getInstance().messageManager.getSilentJoinMessage(p), op);

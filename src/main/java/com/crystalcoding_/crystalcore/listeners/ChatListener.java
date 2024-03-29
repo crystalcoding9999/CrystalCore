@@ -7,12 +7,13 @@ import com.crystalcoding_.crystalcore.vanish.VanishManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
-    private StaffchatManager staffchatManager;
-    private VanishManager vanishManager;
+    private final StaffchatManager staffchatManager;
+    private final VanishManager vanishManager;
 
     public ChatListener(CrystalCore plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -20,7 +21,7 @@ public class ChatListener implements Listener {
         this.vanishManager = plugin.vanishManager;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
 
