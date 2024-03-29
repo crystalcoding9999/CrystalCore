@@ -15,8 +15,8 @@ public class TablistManager {
     private void updateTablist() {
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
 
-        String header = ChatColor.YELLOW + "Welcome to the Server!";
-        String footer = ChatColor.GREEN + "Online Players: " + ChatColor.WHITE + onlinePlayers;
+        String header = ChatColor.translateAlternateColorCodes('&', "&eWelcome to the Server!");
+        String footer = ChatColor.translateAlternateColorCodes('&', "&aOnline Players: &f" + onlinePlayers);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setPlayerListHeader(header);
@@ -24,8 +24,3 @@ public class TablistManager {
         }
     }
 }
-
-
-
-
-
