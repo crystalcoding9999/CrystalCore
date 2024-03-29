@@ -17,6 +17,7 @@ public class CrystalCore extends JavaPlugin {
     public RankManager rankManager;
     public NameManager nameManager;
     public StaffchatManager staffchatManager;
+    public TablistManager tablistManager;
     private static CrystalCore instance;
 
     @Override
@@ -61,6 +62,13 @@ public class CrystalCore extends JavaPlugin {
         getCommand("gmc").setExecutor(new GamemodeCommand());
         getCommand("gmsp").setExecutor(new GamemodeCommand());
         getCommand("gma").setExecutor(new GamemodeCommand());
+
+        getCommand("day").setExecutor(new TimeCommand());
+        getCommand("night").setExecutor(new TimeCommand());
+
+
+        tablistManager = new TablistManager();
+        tablistManager.enableTablist();
     }
 
     @Override
