@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 public class MessageManager {
     private final String Prefix;
+    private final String ChatFormat;
 
     // Join/Leave messages
     private final String JoinMessage;
@@ -78,6 +79,7 @@ public class MessageManager {
         FileConfiguration config = plugin.getConfig();
 
         Prefix = color(getFromConfig("messages.prefix", config));
+        ChatFormat = color(getFromConfig("messages.chatFormat", config));
 
         // Join/Leave messages
         JoinMessage = color(getFromConfig("messages.JoinMessage", config));
@@ -157,6 +159,10 @@ public class MessageManager {
 
     public String getPrefix() {
         return Prefix;
+    }
+
+    public String getChatFormat() {
+        return ChatFormat;
     }
 
     String getPlayerRankPrefix(Player p) {

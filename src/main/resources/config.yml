@@ -2,9 +2,12 @@ messages:
   # Placeholders:
   # {prefix}: reference to the prefix message set below
   # {rank}: reference to the rank of the player affected (or default rank if no rank has been assigned)
+  # {player}: name of the player (only if a player is affected or affiliated)
 
 
   prefix: "[&bCC&r]" # can be used in messages using the '{prefix}' placeholder
+
+  chatFormat: "{rank} {player}: {message}"
 
   # Join Leave messages (placeholder: {player} the target player, {rank} the target players rank)
   JoinMessage: "{prefix} {rank} {player} Has joined the game!"

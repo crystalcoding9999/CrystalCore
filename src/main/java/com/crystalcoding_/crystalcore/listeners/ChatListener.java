@@ -1,5 +1,6 @@
 package com.crystalcoding_.crystalcore.listeners;
 
+import com.crystalcoding_.crystalcore.Core;
 import com.crystalcoding_.crystalcore.CrystalCore;
 import com.crystalcoding_.crystalcore.staffchat.StaffchatManager;
 import com.crystalcoding_.crystalcore.vanish.VanishManager;
@@ -26,6 +27,16 @@ public class ChatListener implements Listener {
         if (staffchatManager.inStaffChat(p) || (vanishManager.isVanished(p) && !e.getMessage().startsWith("!"))) {
             e.setCancelled(true);
             staffchatManager.sendStaffMessage(p, e.getMessage());
+        } else {
+            String format = CrystalCore.getInstance().messageManager.getChatFormat();
+
+            format = format.replace("{rank}", CrystalCore.getInstance().rankManager.getPlayerRank(p).getPrefix());
+            format = format.replace("{player}", p.getName());
+            format = Core.color(format);
+
+            format = format.replace("{message}", e.getMessage());
+
+            e.setFormat(format);
         }
     }
 }
