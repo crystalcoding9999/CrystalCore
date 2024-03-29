@@ -102,3 +102,9 @@ commands:
     description: sssh no one can hear us
   invsee:
     description: lets see what you got
+  day:
+    description: Set time to day
+    usage: /day
+  night:
+      description: Set time to night
+      usage: /night
