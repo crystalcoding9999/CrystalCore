@@ -17,7 +17,7 @@ public class TablistManager {
 
     public TablistManager(CrystalCore plugin) {
         this.plugin = plugin;
-        createTablistConfig(); // Create the tablist.yml file if it doesn't exist
+        createTablistConfig(); 
     }
 
     public void enableTablist() {
@@ -59,7 +59,7 @@ public class TablistManager {
         if (!configFile.exists()) {
             FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
-            // Example default configuration
+            
             config.set("header-footer.header", Arrays.asList("", "&3&lServer name", "", "Online Players: {onlineplayers}", ""));
             config.set("header-footer.footer", Arrays.asList("", "&7Visit our webpage", ""));
 
