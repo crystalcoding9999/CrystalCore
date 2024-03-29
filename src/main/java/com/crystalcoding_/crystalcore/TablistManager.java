@@ -1,52 +1,21 @@
 package com.crystalcoding_.crystalcore;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 
 public class TablistManager {
 
     private static final int REFRESH_TICKS = 20; // 1 second
-    private final CrystalCore plugin;
-
-    public TablistManager(CrystalCore plugin) {
-        this.plugin = plugin;
-        createTablistConfig(); 
-    }
 
     public void enableTablist() {
-        Bukkit.getScheduler().runTaskTimer(plugin, this::updateTablist, 0, REFRESH_TICKS);
+        Bukkit.getScheduler().runTaskTimer(CrystalCore.getInstance(), this::updateTablist, 0, REFRESH_TICKS);
     }
 
     private void updateTablist() {
-        FileConfiguration config = YamlConfiguration.loadConfiguration(getTablistConfigFile());
+        int onlinePlayers = Bukkit.getOnlinePlayers().size() - CrystalCore.getInstance().vanishManager.getVanishedPlayers().size();
 
-        List<String> headerLines = config.getStringList("header-footer.header");
-        List<String> footerLines = config.getStringList("header-footer.footer");
-
-        StringBuilder headerBuilder = new StringBuilder();
-        for (String line : headerLines) {
-            if (!line.isEmpty()) {
-                line = line.replace("{onlineplayers}", String.valueOf(Bukkit.getOnlinePlayers().size()));
-                headerBuilder.append(ChatColor.translateAlternateColorCodes('&', line)).append("\n");
-            }
-        }
-        String header = headerBuilder.toString().trim();
-
-        StringBuilder footerBuilder = new StringBuilder();
-        for (String line : footerLines) {
-            if (!line.isEmpty()) {
-                line = line.replace("{onlineplayers}", String.valueOf(Bukkit.getOnlinePlayers().size()));
-                footerBuilder.append(ChatColor.translateAlternateColorCodes('&', line)).append("\n");
-            }
-        }
-        String footer = footerBuilder.toString().trim();
+        String header = Core.color("&eWelcome to the Server!");
+        String footer = Core.color("&aOnline Players: &f" + onlinePlayers);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setPlayerListHeader(header);
@@ -57,25 +26,5 @@ public class TablistManager {
 
             player.setPlayerListFooter(Core.color(footer));
         }
-    }
-
-    private void createTablistConfig() {
-        File configFile = getTablistConfigFile();
-        if (!configFile.exists()) {
-            FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-
-            
-            config.set("header-footer.header", Arrays.asList("", "&3&lServer name", "", "Online Players: {onlineplayers}", ""));
-            config.set("header-footer.footer", Arrays.asList("", "&7Visit our webpage", ""));
-
-            try {
-                config.save(configFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    private File getTablistConfigFile() {
-        return new File(plugin.getDataFolder(), "tablist.yml");
     }
 }
