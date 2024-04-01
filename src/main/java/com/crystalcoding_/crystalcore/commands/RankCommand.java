@@ -354,7 +354,7 @@ public class RankCommand implements CommandExecutor {
                     break;
             }
         } else {
-            Core.message(messageManager.getMissingArgumentsMessage("rank", "<addparent|create|delete|list|remove|removeparent|set> [arguments]"), player);
+            Core.message(messageManager.getMissingArgumentsMessage("rank", "<set|list|info|addparent|removeparent|create|delete|settemporary|setprefix|addpermission|removepermission|setdefault> [arguments]"), player);
         }
         return true;
     }

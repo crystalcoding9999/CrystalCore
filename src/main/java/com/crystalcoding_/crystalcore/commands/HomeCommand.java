@@ -82,7 +82,7 @@ public class HomeCommand implements CommandExecutor {
         Location location = home.getLoc();
 
         if (location == null) {
-            Core.message(CrystalCore.getInstance().messageManager.getPrefix() + "&cAn unkown error has occured!", p);
+            Core.message(CrystalCore.getInstance().messageManager.getPrefix() + " &cAn unkown error has occured!", p);
             return false;
         }
 
